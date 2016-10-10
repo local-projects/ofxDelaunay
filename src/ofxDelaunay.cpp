@@ -26,21 +26,23 @@ bool ptInTriangle(const ofVec2f & p, const XYZ & p0, const XYZ & p1, const XYZ& 
 void ofxDelaunay::reset(){
     vertices.clear();
     triangles.clear();
+    colors.clear();
 	triangleMesh.clear();
 	ntri = 0;
 }
 
-int ofxDelaunay::addPoint( const ofPoint& point ){
-	return addPoint( point.x, point.y, point.z );
+int ofxDelaunay::addPoint( const ofPoint& point, const ofColor& c){
+	return addPoint( point.x, point.y, point.z, c);
 }
 
-int ofxDelaunay::addPoint( float x, float y, float z ){
+int ofxDelaunay::addPoint( float x, float y, float z, const ofColor& c){
     XYZI v;
     v.x = x;
     v.y = y;
     v.z = z;
 	v.i = vertices.size();
     vertices.push_back(v);
+    colors.push_back(c);
 	return vertices.size();
 }
 
@@ -92,6 +94,7 @@ int ofxDelaunay::triangulate(){
     //copy vertices
 	for (int i = 0; i < nv; i++){
         triangleMesh.addVertex(ofVec3f(vertices[i].x,vertices[i].y,vertices[i].z));
+        triangleMesh.addColor(colors[i]);
     }
 	
 	//copy triangles

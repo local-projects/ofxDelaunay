@@ -30,8 +30,8 @@ public:
     
 	void reset();
 	
-	int addPoint( const ofPoint& point );
-	int addPoint( float x, float y, float z);
+	int addPoint( const ofPoint& point, const ofColor& c=ofColor(255));
+	int addPoint( float x, float y, float z, const ofColor& c=ofColor(255));
 	int addPoints( vector<ofPoint>& points );
 
 	ofPoint getPointNear(ofPoint pos, float minDist, int & index); //returns actual point AND index to point
@@ -50,7 +50,7 @@ public:
 
 
 private:
-
+        vector<ofFloatColor> colors;
 	    vector<XYZI> vertices; //only input of triangulate();
 		vector<ITRIANGLE> triangles; //output of triangulate();
 		int ntri; //# tri
